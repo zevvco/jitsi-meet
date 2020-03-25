@@ -256,9 +256,9 @@ class InfoDialog extends Component<Props, State> {
                                 src = { IconCopy } />
                         </span>
                     </div>
-                    <div className = 'info-dialog-dial-in'>
+                    {/* <div className = 'info-dialog-dial-in'>
                         { this._renderDialInDisplay() }
-                    </div>
+                    </div> */}
                     { liveStreamViewURL && this._renderLiveStreamURL() }
                     <div className = 'info-dialog-password'>
                         <PasswordForm
@@ -513,6 +513,7 @@ class InfoDialog extends Component<Props, State> {
      */
     _renderPasswordAction() {
         const { t } = this.props;
+
         let className, onClick, textKey;
 
 

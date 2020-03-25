@@ -3,7 +3,8 @@
 import React from 'react';
 
 import { translate } from '../../base/i18n';
-import { Watermarks } from '../../base/react';
+
+// import { Watermarks } from '../../base/react';
 import { connect } from '../../base/redux';
 import { isMobileBrowser } from '../../base/environment/utils';
 import { CalendarList } from '../../calendar-sync';
@@ -168,9 +169,10 @@ class WelcomePage extends AbstractWelcomePage {
                 className = { `welcome ${showAdditionalContent
                     ? 'with-content' : 'without-content'}` }
                 id = 'welcome_page'>
-                <div className = 'welcome-watermark'>
+                {/* <div className = 'welcome-watermark'>
                     <Watermarks />
-                </div>
+                </div> */}
+                <div className = 'white-bg' />
                 <div className = 'header'>
                     <div className = 'welcome-page-settings'>
                         <SettingsButton
@@ -183,6 +185,7 @@ class WelcomePage extends AbstractWelcomePage {
                         }
                     </div>
                     <div className = 'header-image' />
+                    <div />
                     <div className = 'header-text'>
                         <h1 className = 'header-text-title'>
                             { t('welcomepage.title') }
@@ -222,13 +225,14 @@ class WelcomePage extends AbstractWelcomePage {
                             }
                         </div>
                     </div>
-                    { this._renderTabs() }
+                    {/* { this._renderTabs() } */}
                 </div>
                 { showAdditionalContent
                     ? <div
                         className = 'welcome-page-content'
                         ref = { this._setAdditionalContentRef } />
                     : null }
+
             </div>
         );
     }

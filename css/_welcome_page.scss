@@ -25,6 +25,7 @@ body.welcome-page {
         overflow: hidden;
         position: relative;
         text-align: center;
+        padding: 2rem;
 
         .header-text {
             display: flex;
@@ -53,6 +54,7 @@ body.welcome-page {
             line-height: $welcomePageHeaderTextDescriptionLineHeight;
             margin-bottom: $welcomePageHeaderTextDescriptionMarginBottom;
             align-self: $welcomePageHeaderTextDescriptionAlignSelf;
+            text-align: center;
         }
 
         #enter_room {
@@ -64,7 +66,7 @@ body.welcome-page {
             background-color: #fff;
             padding: $welcomePageEnterRoomPadding;
             border-radius: $welcomePageEnterRoomBorderRadius;
-
+            border: 2px solid $black;
             .enter-room-input-container {
                 width: 100%;
                 padding: $welcomePageEnterRoomInputContainerPadding;
@@ -86,7 +88,8 @@ body.welcome-page {
                     border: none;
                     display: inline-block;
                     width: 100%;
-                    font-size: 14px;
+                    font-size: 16px;
+                    padding: 1rem 0;
                 }
 
                 ::placeholder {
@@ -101,8 +104,9 @@ body.welcome-page {
             position: relative;
             text-align: left;
             min-height: 354px;
-            width: 710px;
-            background: #75A7E7;
+            width: 100%;
+            max-width: 600px;
+            // background: #75A7E7;
             display: $welcomePageTabContainerDisplay;
             flex-direction: column;
 
@@ -137,7 +141,7 @@ body.welcome-page {
                     cursor: pointer;
 
                     &.selected, &:hover {
-                        background: rgba(9,30,66,0.71);
+                        background: rgba(200,200,206,0.71);
                     }
 
                     &:last-child {
@@ -152,15 +156,21 @@ body.welcome-page {
         width: $welcomePageButtonWidth;
         min-width: $welcomePageButtonMinWidth;
         height: $welcomePageButtonHeight;
-        font-size: $welcomePageButtonFontSize;
+        font-size: 16px;
         font-weight: $welcomePageButtonFontWeight;
-        background: #0074E0;
-        border-radius: $welcomePageButtonBorderRadius;
+        // background: linear-gradient(35deg, , #ff6700);
+        background: $black;
+        color: $black;
+        // border: 2px solid #06048c;
+
+        padding: 0.5rem 1rem;
+        border-radius: 0;
         color: #FFFFFF;
         text-align: center;
         vertical-align: middle;
         line-height: $welcomePageButtonLineHeight;
         cursor: pointer;
+
     }
 
     .welcome-page-settings {
@@ -180,5 +190,13 @@ body.welcome-page {
         position: absolute;
         width: 100%;
         height: 100%;
+    }
+    .white-bg {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      background: white;
     }
 }

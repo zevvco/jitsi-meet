@@ -1,6 +1,6 @@
 // @flow
 
-import { generateRoomWithoutSeparator } from 'js-utils/random';
+// import { generateRoomWithoutSeparator } from 'js-utils/random';
 import { Component } from 'react';
 import type { Dispatch } from 'redux';
 
@@ -222,18 +222,18 @@ export class AbstractWelcomePage extends Component<Props, *> {
      * @returns {void}
      */
     _updateRoomname() {
-        const generatedRoomname = generateRoomWithoutSeparator();
-        const roomPlaceholder = '';
-        const updateTimeoutId = setTimeout(this._updateRoomname, 10000);
-
-        this._clearTimeouts();
-        this.setState(
-            {
-                generatedRoomname,
-                roomPlaceholder,
-                updateTimeoutId
-            },
-            () => this._animateRoomnameChanging(generatedRoomname));
+        // const generatedRoomname = generateRoomWithoutSeparator();
+        // const roomPlaceholder = '';
+        // const updateTimeoutId = setTimeout(this._updateRoomname, 10000);
+        //
+        // this._clearTimeouts();
+        // this.setState(
+        //     {
+        //         generatedRoomname,
+        //         roomPlaceholder,
+        //         updateTimeoutId
+        //     },
+        //     () => this._animateRoomnameChanging(generatedRoomname));
     }
 }
 
