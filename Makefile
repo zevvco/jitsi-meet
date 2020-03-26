@@ -79,7 +79,10 @@ deploy-css:
 deploy-local:
 	([ ! -x deploy-local.sh ] || ./deploy-local.sh)
 
-dev: deploy-init deploy-css deploy-rnnoise-binary deploy-lib-jitsi-meet deploy-libflac
+watch-local:
+	npm run gulp
+
+dev: deploy-init deploy-css deploy-rnnoise-binary deploy-lib-jitsi-meet deploy-libflac watch-local
 	$(WEBPACK_DEV_SERVER)
 
 source-package:
