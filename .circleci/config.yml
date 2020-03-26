@@ -9,6 +9,7 @@ workflows:
   deploy_application:
     jobs:
       - aws-code-deploy/deploy:
+          aws-region: us-east-1
           application-name: jitsi-demo
           bundle-bucket: ddd-deploys
           bundle-key: jitsi-demo
