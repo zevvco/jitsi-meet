@@ -1,0 +1,2 @@
+service jitsi-videobridge start
+service nginx start

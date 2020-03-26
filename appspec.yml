@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /usr/share/jitsi-meet/chloe
+hooks:
+  ApplicationStop:
+    - location: ops/stop_server
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: ops/start_server
+      timeout: 300
+      runas: root
