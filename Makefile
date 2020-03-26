@@ -7,6 +7,7 @@ RNNOISE_WASM_DIR = node_modules/rnnoise-wasm/dist/
 NODE_SASS = ./node_modules/.bin/node-sass
 NPM = npm
 OUTPUT_DIR = .
+RUN_GULP_LOCAL = npm run gulp
 STYLES_BUNDLE = css/all.bundle.css
 STYLES_DESTINATION = css/all.css
 STYLES_MAIN = css/main.scss
@@ -80,10 +81,10 @@ deploy-local:
 	([ ! -x deploy-local.sh ] || ./deploy-local.sh)
 
 watch-local:
-	npm run gulp
+	$(RUN_GULP_LOCAL)
 
-dev: deploy-init deploy-css deploy-rnnoise-binary deploy-lib-jitsi-meet deploy-libflac watch-local
-	$(WEBPACK_DEV_SERVER)
+dev: deploy-init deploy-rnnoise-binary deploy-lib-jitsi-meet deploy-libflac
+	$(WEBPACK_DEV_SERVER) && $(RUN_GULP_LOCAL)
 
 source-package:
 	mkdir -p source_package/jitsi-meet/css && \
