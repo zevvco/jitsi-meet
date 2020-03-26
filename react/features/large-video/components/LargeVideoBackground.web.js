@@ -147,9 +147,9 @@ export class LargeVideoBackground extends Component<Props> {
 
         return (
             <div className = { classNames }>
-                <canvas
+                {/* <canvas
                     id = 'largeVideoBackground'
-                    ref = { this._setCanvasEl } />
+                    ref = { this._setCanvasEl } /> */}
             </div>
         );
     }
@@ -263,4 +263,3 @@ function _mapStateToProps(state) {
 
 
 export default connect(_mapStateToProps)(LargeVideoBackground);
-

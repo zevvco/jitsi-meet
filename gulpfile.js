@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const rename = require('gulp-rename');
 const cleanCSS = require('gulp-clean-css');
-
 const plumber = require('gulp-plumber');
 
 gulp.task('sass', () => gulp.src('./css/main.scss')

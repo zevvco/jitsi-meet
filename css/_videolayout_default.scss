@@ -334,8 +334,30 @@
     height: $thumbnailToolbarHeight;
     padding: 0;
     border: 0;
+
     margin: 0px 5px 0px 0px;
+
+    &.audioMuted {
+      width: 22px;
+      .jitsi-icon {
+        text-align: center;
+        height: 20px;
+        width: 20px;
+        align-items: center;
+        border: none;
+        border-radius: 100px;
+        background: #e62828;
+      }
+    }
 }
+.tile-view {
+  .videocontainer__toolbar {
+    height: 40px;
+    padding: 5px 15px;
+  }
+
+}
+
 
 /**
  * Toolbar icon internal i elements (font icons).

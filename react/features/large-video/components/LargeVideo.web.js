@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { Watermarks } from '../../base/react';
+// import { Watermarks } from '../../base/react';
 import { Captions } from '../../subtitles/';
 import { connect } from '../../base/redux';
 
@@ -31,6 +31,8 @@ class LargeVideo extends Component<Props> {
      * @returns {React$Element}
      */
     render() {
+        console.log(111, interfaceConfig);
+
         return (
             <div
                 className = 'videocontainer'
@@ -40,7 +42,6 @@ class LargeVideo extends Component<Props> {
                 </div>
                 <div id = 'etherpad' />
 
-                <Watermarks />
 
                 <div id = 'dominantSpeaker'>
                     <div className = 'dynamic-shadow' />

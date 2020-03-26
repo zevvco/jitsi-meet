@@ -30,6 +30,7 @@
          */
         pointer-events: none;
         text-align: right;
+        height: 24px;
 
         > div {
             pointer-events: none;
@@ -42,6 +43,18 @@
 
         .toolbar-icon {
             pointer-events: all;
+        }
+        .audioMuted.toolbar-icon {
+          width: 22px;
+          .jitsi-icon {
+            text-align: center;
+            height: 20px;
+            width: 20px;
+            align-items: center;
+            border: none;
+            border-radius: 100px;
+            background: #e62828;
+          }
         }
     }
 

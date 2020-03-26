@@ -279,11 +279,12 @@ class Toolbox extends Component<Props, State> {
                 exec: this._onShortcutToggleScreenshare,
                 helpDescription: 'keyboardShortcuts.toggleScreensharing'
             },
-            this._shouldShowButton('raisehand') && {
-                character: 'R',
-                exec: this._onShortcutToggleRaiseHand,
-                helpDescription: 'keyboardShortcuts.raiseHand'
-            },
+
+            // this._shouldShowButton('raisehand') && {
+            //     character: 'R',
+            //     exec: this._onShortcutToggleRaiseHand,
+            //     helpDescription: 'keyboardShortcuts.raiseHand'
+            // },
             this._shouldShowButton('fullscreen') && {
                 character: 'S',
                 exec: this._onShortcutToggleFullScreen,
@@ -989,10 +990,9 @@ class Toolbox extends Component<Props, State> {
                     key = 'sharedvideo'
                     onClick = { this._onToolbarToggleSharedVideo }
                     text = { _sharingVideo ? t('toolbar.stopSharedVideo') : t('toolbar.sharedvideo') } />,
-            this._shouldShowButton('etherpad')
-                && <SharedDocumentButton
-                    key = 'etherpad'
-                    showLabel = { true } />,
+            <SharedDocumentButton
+                key = 'etherpad'
+                showLabel = { true } />,
             <VideoBlurButton
                 key = 'videobackgroundblur'
                 showLabel = { true }
@@ -1126,7 +1126,8 @@ class Toolbox extends Component<Props, State> {
             _chatOpen,
             _hideInviteButton,
             _overflowMenuVisible,
-            _raisedHand,
+
+            // _raisedHand,
             t
         } = this.props;
         const overflowMenuContent = this._renderOverflowMenuContent();
@@ -1209,15 +1210,15 @@ class Toolbox extends Component<Props, State> {
         return (
             <div className = 'toolbox-content'>
                 <div className = 'button-group-left'>
-                    { buttonsLeft.indexOf('desktop') !== -1
-                        && this._renderDesktopSharingButton() }
-                    { buttonsLeft.indexOf('raisehand') !== -1
+                    {/* { buttonsLeft.indexOf('desktop') !== -1
+                  && this._renderDesktopSharingButton() } */}
+                    {/* { buttonsLeft.indexOf('raisehand') !== -1
                         && <ToolbarButton
                             accessibilityLabel = { t('toolbar.accessibilityLabel.raiseHand') }
                             icon = { IconRaisedHand }
                             onClick = { this._onToolbarToggleRaiseHand }
                             toggled = { _raisedHand }
-                            tooltip = { t('toolbar.raiseHand') } /> }
+                            tooltip = { t('toolbar.raiseHand') } /> } */}
                     { buttonsLeft.indexOf('chat') !== -1
                         && <div className = 'toolbar-button-with-badge'>
                             <ToolbarButton
@@ -1228,10 +1229,9 @@ class Toolbox extends Component<Props, State> {
                                 tooltip = { t('toolbar.chat') } />
                             <ChatCounter />
                         </div> }
-                    {
-                        buttonsLeft.indexOf('closedcaptions') !== -1
-                            && <ClosedCaptionButton />
-                    }
+
+                    <ClosedCaptionButton />
+
                 </div>
                 <div className = 'button-group-center'>
                     <AudioMuteButton
