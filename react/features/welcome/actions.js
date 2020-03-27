@@ -2,7 +2,8 @@
 
 import {
     SET_SIDEBAR_VISIBLE,
-    SET_WELCOME_PAGE_LISTS_DEFAULT_PAGE
+    SET_WELCOME_PAGE_LISTS_DEFAULT_PAGE,
+    SET_INVITE_FORM_SUBMIT_SUCCESS
 } from './actionTypes';
 
 /**
@@ -39,7 +40,12 @@ export function setWelcomePageListsDefaultPage(pageIndex: number) {
 }
 
 
-
+/**
+ * Toggles success flag on form submit.
+ *
+ * @param {boolean} isSubmitSuccessful - Should the flag be set as true.
+ * @returns {undefined}
+ */
 export function setInviteFormSubmissionState(isSubmitSuccessful: boolean) {
     return {
         type: SET_INVITE_FORM_SUBMIT_SUCCESS,

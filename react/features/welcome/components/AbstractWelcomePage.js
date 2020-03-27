@@ -10,7 +10,7 @@ import { isCalendarEnabled } from '../../calendar-sync';
 import { isRoomValid } from '../../base/conference';
 
 import {
-  setInviteFormSubmissionState
+    setInviteFormSubmissionState
 } from '../actions';
 
 /**
@@ -262,5 +262,5 @@ export function _mapStateToProps(state: Object) {
 }
 
 export const _mapDispatchToProps = {
-  setInviteFormSubmissionState,
-}
+    setInviteFormSubmissionState
+};

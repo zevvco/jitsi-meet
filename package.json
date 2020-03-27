@@ -148,7 +148,7 @@
     "postinstall": "jetify",
     "validate": "npm ls",
     "gulp": "gulp",
-    "lint-fix": "eslint --fix"
+    "lint-fix": "eslint . --fix"
   },
   "pre-commit": [
     "lint"

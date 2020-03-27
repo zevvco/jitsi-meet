@@ -1,6 +1,6 @@
 /* global interfaceConfig */
 
-import React, {Fragment} from 'react';
+import React from 'react';
 
 import { translate } from '../../base/i18n';
 
@@ -16,6 +16,7 @@ import { AbstractWelcomePage, _mapStateToProps, _mapDispatchToProps } from './Ab
 import Tabs from './Tabs';
 
 import InviteForm from './InviteForm';
+
 /**
  * The pattern used to validate room name.
  * @type {string}
@@ -161,7 +162,6 @@ class WelcomePage extends AbstractWelcomePage {
      */
     render() {
         const { t } = this.props;
-        const { APP_NAME } = interfaceConfig;
         const showAdditionalContent = this._shouldShowAdditionalContent();
         const showAdditionalToolbarContent = this._shouldShowAdditionalToolbarContent();
         const showResponsiveText = this._shouldShowResponsiveText();
@@ -191,12 +191,12 @@ class WelcomePage extends AbstractWelcomePage {
                             { t('welcomepage.title') }
                         </h1>
                     </div>
-                    <InviteForm onSubmit={this.props.setInviteFormSubmissionState} />
+                    <InviteForm onSubmit = { this.props.setInviteFormSubmissionState } />
                     <br />
 
                     <div id = 'enter_room'>
                         <div className = 'enter-room-input-container'>
-                          <div className="enter-room-subtitle">Already have a date?</div>
+                            <div className = 'enter-room-subtitle'>Already have a date?</div>
 
                             <div className = 'enter-room-title'>
                                 { t('welcomepage.enterRoomTitle') }
@@ -395,4 +395,4 @@ class WelcomePage extends AbstractWelcomePage {
 
 }
 
-export default translate(connect(_mapStateToProps,  _mapDispatchToProps)(WelcomePage));
+export default translate(connect(_mapStateToProps, _mapDispatchToProps)(WelcomePage));

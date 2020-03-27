@@ -4,5 +4,9 @@ module.exports = {
         'eslint-config-jitsi/jsdoc',
         'eslint-config-jitsi/react',
         '.eslintrc-react-native.js'
-    ]
+    ],
+    rules: {
+        'react/jsx-handler-names': 'off',
+        'require-jsdoc': 'warn'
+    }
 };

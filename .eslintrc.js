@@ -3,6 +3,7 @@ module.exports = {
         'eslint-config-jitsi'
     ],
     rules: {
-        'newline-after-var': 'off'
+        'newline-after-var': 'off',
+        'react/jsx-handler-names': 'off'
     }
 };
