@@ -127,49 +127,55 @@ class InviteForm extends Component {
                                         </Field>
                                     </div>
                                 </div>
-                                <div className = 'date-creation-row'>
-                                    <div className = 'date-creation-row-child'>
-                                        <Field
-                                            defaultValue = ''
-                                            isRequired = { true }
-                                            label = "Date's Name"
-                                            name = 'date-name'>
-                                            {({ fieldProps, error }) => (
-                                                <Fragment>
+                                <div>
+                                    <br />
 
-                                                    {error && (
-                                                        <ErrorMessage>
-                              This user name is already in use, try another one.
-                                                        </ErrorMessage>
-                                                    )}
-                                                    <TextField
-                                                        autoComplete = 'off'
-                                                        { ...fieldProps } />
-                                                </Fragment>
-                                            )}
-                                        </Field>
-                                    </div>
-                                    <div className = 'date-creation-row-child'>
-                                        <Field
-                                            defaultValue = ''
-                                            isRequired = { true }
-                                            label = "Date's Email"
-                                            name = 'date-email'>
-                                            {({ fieldProps, error }) => (
-                                                <Fragment>
+                                  Guests
 
-                                                    {error && (
-                                                        <ErrorMessage>
+                                    <div className = 'date-creation-row'>
+                                        <div className = 'date-creation-row-child'>
+                                            <Field
+                                                defaultValue = ''
+                                                isRequired = { true }
+                                                label = "Date's Name"
+                                                name = 'date-name'>
+                                                {({ fieldProps, error }) => (
+                                                    <Fragment>
+
+                                                        {error && (
+                                                            <ErrorMessage>
                               This user name is already in use, try another one.
-                                                        </ErrorMessage>
-                                                    )}
-                                                    <TextField
-                                                        autoComplete = 'off'
-                                                        type = 'email'
-                                                        { ...fieldProps } />
-                                                </Fragment>
-                                            )}
-                                        </Field>
+                                                            </ErrorMessage>
+                                                        )}
+                                                        <TextField
+                                                            autoComplete = 'off'
+                                                            { ...fieldProps } />
+                                                    </Fragment>
+                                                )}
+                                            </Field>
+                                        </div>
+                                        <div className = 'date-creation-row-child'>
+                                            <Field
+                                                defaultValue = ''
+                                                isRequired = { true }
+                                                label = "Date's Email"
+                                                name = 'date-email'>
+                                                {({ fieldProps, error }) => (
+                                                    <Fragment>
+
+                                                        {error && (
+                                                            <ErrorMessage>
+                              This user name is already in use, try another one.
+                                                            </ErrorMessage>
+                                                        )}
+                                                        <TextField
+                                                            autoComplete = 'off'
+                                                            type = 'email'
+                                                            { ...fieldProps } />
+                                                    </Fragment>
+                                                )}
+                                            </Field>
+                                        </div>
                                     </div>
                                 </div>
                             </FormSection>

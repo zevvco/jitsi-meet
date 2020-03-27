@@ -191,6 +191,11 @@ class WelcomePage extends AbstractWelcomePage {
                             { t('welcomepage.title') }
                         </h1>
                     </div>
+                    <div className = 'header-text-description'>
+                      If you’re missing the face to face experience of sharing a meal with someone, don’t worry, we
+                      have you covered! Digital Dinner Date helps you coordinate with someone special, friends, or
+                      family so you can share a meal together no matter where you’re located.
+                    </div>
                     <InviteForm onSubmit = { this.props.setInviteFormSubmissionState } />
                     <br />
 

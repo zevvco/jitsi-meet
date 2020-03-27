@@ -261,6 +261,10 @@ export function _mapStateToProps(state: Object) {
     };
 }
 
-export const _mapDispatchToProps = {
-    setInviteFormSubmissionState
-};
+
+export function _mapDispatchToProps(dispatch: Function) {
+    return {
+        dispatch,
+        setInviteFormSubmissionState: (value: boolean) => dispatch(setInviteFormSubmissionState(value))
+    };
+}
