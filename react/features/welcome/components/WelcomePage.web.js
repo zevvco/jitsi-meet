@@ -1,6 +1,6 @@
 /* global interfaceConfig */
 
-import React from 'react';
+import React, {Fragment} from 'react';
 
 import { translate } from '../../base/i18n';
 
@@ -11,9 +11,11 @@ import { CalendarList } from '../../calendar-sync';
 import { RecentList } from '../../recent-list';
 import { SettingsButton, SETTINGS_TABS } from '../../settings';
 
-import { AbstractWelcomePage, _mapStateToProps } from './AbstractWelcomePage';
+
+import { AbstractWelcomePage, _mapStateToProps, _mapDispatchToProps } from './AbstractWelcomePage';
 import Tabs from './Tabs';
 
+import InviteForm from './InviteForm';
 /**
  * The pattern used to validate room name.
  * @type {string}
@@ -184,19 +186,18 @@ class WelcomePage extends AbstractWelcomePage {
                             : null
                         }
                     </div>
-                    <div className = 'header-image' />
-                    <div />
                     <div className = 'header-text'>
                         <h1 className = 'header-text-title'>
                             { t('welcomepage.title') }
                         </h1>
-                        <p className = 'header-text-description'>
-                            { t('welcomepage.appDescription',
-                                { app: APP_NAME }) }
-                        </p>
                     </div>
+                    <InviteForm onSubmit={this.props.setInviteFormSubmissionState} />
+                    <br />
+
                     <div id = 'enter_room'>
                         <div className = 'enter-room-input-container'>
+                          <div className="enter-room-subtitle">Already have a date?</div>
+
                             <div className = 'enter-room-title'>
                                 { t('welcomepage.enterRoomTitle') }
                             </div>
@@ -225,6 +226,7 @@ class WelcomePage extends AbstractWelcomePage {
                             }
                         </div>
                     </div>
+
                     {/* { this._renderTabs() } */}
                 </div>
                 { showAdditionalContent
@@ -393,4 +395,4 @@ class WelcomePage extends AbstractWelcomePage {
 
 }
 
-export default translate(connect(_mapStateToProps)(WelcomePage));
+export default translate(connect(_mapStateToProps,  _mapDispatchToProps)(WelcomePage));

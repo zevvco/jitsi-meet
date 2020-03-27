@@ -16,7 +16,7 @@ gulp.task('sass', () => gulp.src('./css/main.scss')
 
 
 gulp.task('watch', () => {
-    gulp.watch('css/**/*.scss', gulp.series('sass'));
+  gulp.watch('css/**/*.scss', gulp.series('sass'));
 });
 
 gulp.task('default', gulp.series('sass', 'watch'));

@@ -37,3 +37,12 @@ export function setWelcomePageListsDefaultPage(pageIndex: number) {
         pageIndex
     };
 }
+
+
+
+export function setInviteFormSubmissionState(isSubmitSuccessful: boolean) {
+    return {
+        type: SET_INVITE_FORM_SUBMIT_SUCCESS,
+        isSubmitSuccessful
+    };
+}

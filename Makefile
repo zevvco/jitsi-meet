@@ -84,7 +84,7 @@ watch-local:
 	$(RUN_GULP_LOCAL)
 
 dev: deploy-init deploy-rnnoise-binary deploy-lib-jitsi-meet deploy-libflac
-	$(WEBPACK_DEV_SERVER) && $(RUN_GULP_LOCAL)
+	$(WEBPACK_DEV_SERVER) & $(RUN_GULP_LOCAL)
 
 source-package:
 	mkdir -p source_package/jitsi-meet/css && \
