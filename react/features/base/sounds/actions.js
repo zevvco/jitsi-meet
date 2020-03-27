@@ -8,7 +8,8 @@ import {
     PLAY_SOUND,
     REGISTER_SOUND,
     STOP_SOUND,
-    UNREGISTER_SOUND
+    UNREGISTER_SOUND,
+    SET_VOLUME_LEVEL
 } from './actionTypes';
 import { getSoundsPath } from './functions';
 
@@ -106,6 +107,14 @@ export function registerSound(
     };
 }
 
+export function setVolumeLevel(soundId: string, level: Number) {
+    return {
+        type: SET_VOLUME_LEVEL,
+        soundId,
+        level
+    };
+}
+
 /**
  * Stops playback of the sound identified by the given sound id.
  *
@@ -122,6 +131,7 @@ export function stopSound(soundId: string): Object {
         soundId
     };
 }
+
 
 /**
  * Unregister the sound identified by the given id. It will make the

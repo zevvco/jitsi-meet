@@ -10,6 +10,8 @@
  */
 export const _ADD_AUDIO_ELEMENT = '_ADD_AUDIO_ELEMENT';
 
+export const SET_VOLUME_LEVEL = 'SET_VOLUME_LEVEL';
+
 /**
  * The type of feature/internal/protected (redux) action to remove an audio
  * element for given sound identifier from the sounds collection state.

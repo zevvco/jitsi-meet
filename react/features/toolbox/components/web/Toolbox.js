@@ -21,7 +21,8 @@ import {
     IconRaisedHand,
     IconRec,
     IconShareDesktop,
-    IconShareVideo
+    IconShareVideo,
+    IconVolume
 } from '../../../base/icons';
 import {
     getLocalParticipant,
@@ -41,6 +42,9 @@ import {
     isAddPeopleEnabled,
     isDialOutEnabled
 } from '../../../invite';
+import {
+    openAudioMixer
+} from '../../../audio-ambience';
 import { openKeyboardShortcutsDialog } from '../../../keyboard-shortcuts';
 import {
     LocalRecordingButton,
@@ -239,6 +243,7 @@ class Toolbox extends Component<Props, State> {
         this._onShortcutToggleVideoQuality = this._onShortcutToggleVideoQuality.bind(this);
         this._onToolbarOpenFeedback = this._onToolbarOpenFeedback.bind(this);
         this._onToolbarOpenInvite = this._onToolbarOpenInvite.bind(this);
+        this._onToolbarOpenAudioMixer = this._onToolbarOpenAudioMixer.bind(this);
         this._onToolbarOpenKeyboardShortcuts = this._onToolbarOpenKeyboardShortcuts.bind(this);
         this._onToolbarOpenSpeakerStats = this._onToolbarOpenSpeakerStats.bind(this);
         this._onToolbarOpenVideoQuality = this._onToolbarOpenVideoQuality.bind(this);
@@ -696,6 +701,19 @@ class Toolbox extends Component<Props, State> {
     _onToolbarOpenInvite() {
         sendAnalytics(createToolbarEvent('invite'));
         this.props.dispatch(beginAddPeople());
+    }
+
+    _onToolbarOpenAudioMixer: () => void;
+
+    /**
+     * Creates an analytics toolbar event and dispatches an action for opening
+     * the modal for inviting people directly into the conference.
+     *
+     * @private
+     * @returns {void}
+     */
+    _onToolbarOpenAudioMixer() {
+        this.props.dispatch(openAudioMixer());
     }
 
     _onToolbarOpenKeyboardShortcuts: () => void;
@@ -1229,8 +1247,12 @@ class Toolbox extends Component<Props, State> {
                                 tooltip = { t('toolbar.chat') } />
                             <ChatCounter />
                         </div> }
+                    <ToolbarButton
+                        accessibilityLabel = 'Audio Mixer'
+                        icon = { IconVolume }
+                        onClick = { this._onToolbarOpenAudioMixer }
+                        tooltip = 'Audio Mixer' />
 
-                    <ClosedCaptionButton />
 
                 </div>
                 <div className = 'button-group-center'>
@@ -1250,13 +1272,7 @@ class Toolbox extends Component<Props, State> {
                     }
                     { buttonsRight.indexOf('tileview') !== -1
                         && <TileViewButton /> }
-                    { buttonsRight.indexOf('invite') !== -1
-                        && <ToolbarButton
-                            accessibilityLabel =
-                                { t('toolbar.accessibilityLabel.invite') }
-                            icon = { IconInvite }
-                            onClick = { this._onToolbarOpenInvite }
-                            tooltip = { t('toolbar.invite') } /> }
+
                     {
                         buttonsRight.indexOf('info') !== -1
                             && <InfoDialogButton />

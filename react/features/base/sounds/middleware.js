@@ -2,7 +2,7 @@
 
 import { MiddlewareRegistry } from '../redux';
 
-import { PLAY_SOUND, STOP_SOUND } from './actionTypes';
+import { PLAY_SOUND, STOP_SOUND, SET_VOLUME_LEVEL } from './actionTypes';
 import logger from './logger';
 
 /**
@@ -18,6 +18,9 @@ MiddlewareRegistry.register(store => next => action => {
         break;
     case STOP_SOUND:
         _stopSound(store, action.soundId);
+        break;
+    case SET_VOLUME_LEVEL:
+        _setAudioElementVolume(store, action.soundId, action.level);
         break;
     }
 
@@ -44,6 +47,22 @@ function _playSound({ getState }, soundId) {
         }
     } else {
         logger.warn(`PLAY_SOUND: no sound found for id: ${soundId}`);
+    }
+}
+
+function _setAudioElementVolume({ getState }, soundId, level) {
+    const sounds = getState()['features/base/sounds'];
+    const sound = sounds.get(soundId);
+
+    if (sound) {
+        if (sound.audioElement) {
+            sound.audioElement._ref.volume = level;
+            console.log('set volume', sound.audioElement, level);
+        } else {
+            logger.warn(`SET_VOLUME_LEVEL: sound not loaded yet for id: ${soundId}`);
+        }
+    } else {
+        logger.warn(`SET_VOLUME_LEVEL: no sound found for id: ${soundId}`);
     }
 }
 

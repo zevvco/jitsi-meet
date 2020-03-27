@@ -13,6 +13,7 @@ import '../../noise-detection';
 import '../../power-monitor';
 import '../../room-lock';
 import '../../talk-while-muted';
+import '../../audio-ambience';
 import '../../video-layout';
 
 import { AbstractApp } from './AbstractApp';

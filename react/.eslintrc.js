@@ -7,6 +7,7 @@ module.exports = {
     ],
     rules: {
         'react/jsx-handler-names': 'off',
-        'require-jsdoc': 'warn'
+        'require-jsdoc': 'off',
+        'react/jsx-no-bind': 'off'
     }
 };

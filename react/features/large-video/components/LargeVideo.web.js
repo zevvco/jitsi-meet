@@ -53,7 +53,7 @@ class LargeVideo extends Component<Props> {
                     <div id = 'largeVideoBackgroundContainer' />
 
                     {/*
-                      * FIXME: the architecture of elements related to the large
+                      * FIXME: the architec ture of elements related to the large
                       * video and the naming. The background is not part of
                       * largeVideoWrapper because we are controlling the size of
                       * the video through largeVideoWrapper. That's why we need
