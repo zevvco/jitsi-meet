@@ -3,17 +3,23 @@ body.welcome-page {
     overflow: auto;
 }
 
-$dark: #253858;
+$dark: #222222;
 
 .welcome {
     // background-image: $welcomePageBackground;
     display: flex;
     flex-direction: column;
-    font-family: $welcomePageFontFamily;
+    letter-spacing: .02em;
+    line-height: 1.6;
     justify-content: space-between;
     min-height: 100vh;
     position: relative;
-
+    .spacer {
+      max-width: 4rem;
+      border-bottom: 2px solid $dark;
+      width: 100%;
+      margin: 1rem auto;;
+    }
     .header {
         background-image: $welcomePageHeaderBackground;
         background-position: $welcomePageHeaderBackgroundPosition;
@@ -29,13 +35,40 @@ $dark: #253858;
         text-align: center;
         padding: 2rem;
 
+        .zevv-logo {
+          margin-top: 4rem;
+          height: 2rem;
+          width: 3rem;
+          border: 2px solid #222222;
+          padding-top: 0.1rem;
+          opacity: 0.3;
+          svg {
+            fill:  #222222;
+          }
+        }
+
+
+        .logo {
+
+          height: 7rem;
+          width: 14rem;
+          vertical-align: middle;
+          padding-bottom: 3rem;
+          padding-top: 1rem;
+          svg {
+            fill:  #222222;
+          }
+
+        }
+
         .header-text {
             display: flex;
             flex-direction: column;
+            margin: 0 auto;
+            max-width: 650px;
+            width: 100%;
             margin-top: 5rem;
             margin-bottom: 1rem;
-            max-width: calc(100% - 40px);
-            width: 650px;
             z-index: $zindex2;
         }
 
@@ -43,7 +76,6 @@ $dark: #253858;
             color: $dark;
             font-size: $welcomePageHeaderTextTitleFontSize;
             font-weight: $welcomePageHeaderTextTitleFontWeight;
-            line-height: $welcomePageHeaderTextTitleLineHeight;
             margin-bottom: $welcomePageHeaderTextTitleMarginBottom;
             opacity: $welcomePageHeaderTextTitleOpacity;
         }
@@ -51,46 +83,72 @@ $dark: #253858;
         .header-text-description {
             display: $welcomePageHeaderTextDescriptionDisplay;
             color: $dark;
-            font-size: 12px;
+            font-size: 16px;
             font-weight: $welcomePageHeaderTextDescriptionFontWeight;
-            line-height: $welcomePageHeaderTextDescriptionLineHeight;
             margin-bottom: $welcomePageHeaderTextDescriptionMarginBottom;
             align-self: $welcomePageHeaderTextDescriptionAlignSelf;
             text-align: left;
-            max-width: calc(100% - 40px);
-            width: 680px;
+            max-width: 650px;
+            width: 100%;
             z-index: 2;
             margin: 0 auto;
-
+        }
+        .header-text-description-inner {
+          padding: 0.5rem;
 
         }
 
+
         .date-creation-wrap {
-          max-width: calc(100% - 40px);
-          width: 680px;
+          max-width: 650px;
+          width: 100%;
           z-index: 2;
           margin: 0 auto;
           padding-bottom: 2rem;
+          input {
+            font-size: 16px;
+            color: $dark;
+          }
+          .guest-section {
+            margin-top: 1rem;
+            font-size: 20px;
+            font-weight: bold;
+            color: $dark;
+          }
+          .guest-buttons {
+            text-align: right;
+            padding: 0.5rem;
+            button {
+              margin-left: auto;
+              margin-right: 0;
+              opacity: 0.5;
+              border: 1px solid $dark;
+              outline: none;
+              background: transparent;
+              color: $dark;
+              padding: 0.25rem 1rem;
+            }
+          }
           // border: 2px solid $black;
           .date-creation-title {
             display: $welcomePageEnterRoomTitleDisplay;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
             padding: 0.5rem;
             color: $dark;
-            text-align: left;
+            text-align: center;
           }
           .date-creation-subtitle {
             display: $welcomePageEnterRoomTitleDisplay;
-            font-size: 12px;
+            font-size: 16px;
             padding: 0 0.5rem 0.5rem;
             color: $dark;
-            text-align: left;
+            text-align: center;
           }
           .date-creation-row {
             padding: 0rem;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             flex-direction: column;
             @media screen and (min-width: 760px) {
@@ -99,6 +157,8 @@ $dark: #253858;
             }
             label {
               color: $dark;
+              font-size: 12px;
+
             }
             .date-creation-row-child {
               flex: 1 0 auto;
@@ -111,6 +171,7 @@ $dark: #253858;
               }
 
             }
+
             .date-creation-submit-button {
               padding: 0.5rem 1rem;
               height: auto;
@@ -133,10 +194,12 @@ $dark: #253858;
         #enter_room {
             display: flex;
             align-items: center;
-            max-width: calc(100% - 40px);
-            width: $welcomePageEnterRoomWidth;
+            margin: 0 auto;
+            max-width: 650px;
+            width: 100%;
             z-index: $zindex2;
-            background-color: #fff;
+            padding: 0.5rem;
+
             // padding: $welcomePageEnterRoomPadding;
             border-radius: $welcomePageEnterRoomBorderRadius;
             // border: 2px solid $black;
@@ -145,7 +208,7 @@ $dark: #253858;
                 width: 100%;
                 padding: $welcomePageEnterRoomInputContainerPadding;
                 text-align: left;
-                color: #253858;
+                color: $dark;
                 height: fit-content;
                 border-width: $welcomePageEnterRoomInputContainerBorderWidth;
                 border-style: $welcomePageEnterRoomInputContainerBorderStyle;
@@ -159,6 +222,7 @@ $dark: #253858;
                     font-weight: bold;
                     padding-bottom: 5px;
                 }
+
 
                 .enter-room-input {
                     border: none;
@@ -272,6 +336,7 @@ $dark: #253858;
       left: 1rem;
       right: 1rem;
       bottom: 1rem;
-      background: white;
+      background: #fdfdfa;
+      border: 2px solid $dark;
     }
 }

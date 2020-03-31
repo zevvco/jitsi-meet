@@ -1228,8 +1228,8 @@ class Toolbox extends Component<Props, State> {
         return (
             <div className = 'toolbox-content'>
                 <div className = 'button-group-left'>
-                    {/* { buttonsLeft.indexOf('desktop') !== -1
-                  && this._renderDesktopSharingButton() } */}
+                    { buttonsLeft.indexOf('desktop') !== -1
+                  && this._renderDesktopSharingButton() }
                     {/* { buttonsLeft.indexOf('raisehand') !== -1
                         && <ToolbarButton
                             accessibilityLabel = { t('toolbar.accessibilityLabel.raiseHand') }

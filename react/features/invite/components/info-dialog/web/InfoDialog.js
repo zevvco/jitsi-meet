@@ -22,7 +22,8 @@ import {
 } from '../../../functions';
 import logger from '../../../logger';
 import DialInNumber from './DialInNumber';
-import PasswordForm from './PasswordForm';
+
+// import PasswordForm from './PasswordForm';
 
 
 /**
@@ -260,14 +261,14 @@ class InfoDialog extends Component<Props, State> {
                         { this._renderDialInDisplay() }
                     </div> */}
                     { liveStreamViewURL && this._renderLiveStreamURL() }
-                    <div className = 'info-dialog-password'>
+                    {/* <div className = 'info-dialog-password'>
                         <PasswordForm
                             editEnabled = { this.state.passwordEditEnabled }
                             locked = { this.props._locked }
                             onSubmit = { this._onPasswordSubmit }
                             password = { this.props._password }
                             passwordNumberOfDigits = { this.props._passwordNumberOfDigits } />
-                    </div>
+                    </div> */}
                     <div className = 'info-dialog-action-links'>
                         <div className = 'info-dialog-action-link'>
                             <a
@@ -276,7 +277,7 @@ class InfoDialog extends Component<Props, State> {
                                 { t('dialog.copy') }
                             </a>
                         </div>
-                        { this._renderPasswordAction() }
+                        {/* { this._renderPasswordAction() } */}
                     </div>
                 </div>
                 <textarea

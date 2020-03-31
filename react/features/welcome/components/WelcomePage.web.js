@@ -12,6 +12,9 @@ import { RecentList } from '../../recent-list';
 import { SettingsButton, SETTINGS_TABS } from '../../settings';
 
 
+import Logo from '../../../../images/digitaldining-vector.svg';
+import ZevvLogo from '../../../../images/zevv-logo.svg';
+
 import { AbstractWelcomePage, _mapStateToProps, _mapDispatchToProps } from './AbstractWelcomePage';
 import Tabs from './Tabs';
 
@@ -186,18 +189,28 @@ class WelcomePage extends AbstractWelcomePage {
                             : null
                         }
                     </div>
-                    <div className = 'header-text'>
+                    <div className = 'zevv-logo'>
+                        <ZevvLogo />
+                    </div>
+                    <div className = 'logo'>
+                        <Logo />
+                    </div>
+                    {/* <div className = 'header-text'>
                         <h1 className = 'header-text-title'>
                             { t('welcomepage.title') }
                         </h1>
-                    </div>
+                    </div> */}
                     <div className = 'header-text-description'>
-                      If you’re missing the face to face experience of sharing a meal with someone, don’t worry, we
-                      have you covered! Digital Dinner Date helps you coordinate with someone special, friends, or
-                      family so you can share a meal together no matter where you’re located.
+                        <div className = 'header-text-description-inner'>
+                        If you’re missing the face to face experience of sharing a meal with someone, don’t worry, we
+                        have you covered! Diner.digital helps you coordinate with someone special, friends, or
+                        family so you can share a meal together no matter where you’re
+                            <span dangerouslySetInnerHTML = {{ __html: '&nbsp;' }} />located.
+                        </div>
                     </div>
+                    <div className = 'spacer' />
                     <InviteForm onSubmit = { this.props.setInviteFormSubmissionState } />
-                    <br />
+                    <div className = 'spacer' />
 
                     <div id = 'enter_room'>
                         <div className = 'enter-room-input-container'>

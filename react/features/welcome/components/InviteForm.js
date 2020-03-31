@@ -7,7 +7,7 @@ import TextField from '@atlaskit/textfield';
 import Button from '@atlaskit/button';
 import { customAlphabet } from 'nanoid';
 
-const nanoid = customAlphabet('2346789ABDEFGHJLMNPQRTVWXYZ', 10);
+const nanoid = customAlphabet('2346789ABDEFGHJLMNPQRTVWXYZ', 6);
 
 import Form, {
 
@@ -54,6 +54,8 @@ const timePickerOptions = [
     '23:30'
 ];
 
+const cleanString = s => s.trim().replace(/[^\d\w\s]+/g, '');
+
 class InviteForm extends Component {
     /**
     * Initializes a new InviteForm instance.
@@ -65,8 +67,13 @@ class InviteForm extends Component {
         super(props);
         this.validateDate = this.validateDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.increaseGuests = this.increaseGuests.bind(this);
         this.defaultDate = moment().add(10, 'm')
                           .format('YYYY-MM-DDTHH:mm');
+
+        this.state = {
+            numberOfGuests: 1
+        };
     }
 
     /**
@@ -84,34 +91,72 @@ class InviteForm extends Component {
 
         return;
     }
+    validateNonEmpty(value) {
+        if (!value.trim().length) {
+            return 'Cannot be empty';
+        }
+
+        return;
+    }
+    increaseGuests() {
+
+        const { numberOfGuests } = this.state;
+        if (numberOfGuests < 5) {
+            console.log('increasing', numberOfGuests);
+            this.setState({
+                numberOfGuests: numberOfGuests + 1
+            });
+        }
+    }
     onSubmit(formData, formControl, complete) {
         const {
             fromName,
             fromEmail,
-            toName,
-            toEmail,
             datetime
         } = formData;
 
-        const roomName = nanoid();
+        const { numberOfGuests } = this.state;
+        const toNameArray = [];
+        const toEmailArray = [];
+
+        for (let i = 0; i < numberOfGuests; i++) {
+            toNameArray.push(cleanString(formData[`toName-${i}`]));
+            toEmailArray.push(formData[`toEmail-${i}`]);
+        }
+
+        const toNameString = numberOfGuests > 1
+            ? `${toNameArray.slice(0, -1).join(', ')} and ${toNameArray.slice(-1)}`
+            : toNameArray[0];
+
+        //  array of names, ui
+        const reservationCode = `${cleanString(fromName.split(' ')[0])}-${nanoid()}`;
         const timezone = moment.tz(moment.tz.guess(true)).format('z');
         const data = {
-            fromName,
-            fromEmail,
-            toName,
-            toEmail: [ toEmail ],
+            fromName: cleanString(fromName),
+            fromEmail: fromEmail.trim(),
+            toName: toNameString,
+            toEmail: [ toEmailArray ],
             datetime,
             unixDatetime: moment(datetime).format('x'),
             meetingTime: moment(datetime).format('h:mm A ') + timezone,
             meetingDate: moment(datetime).format('dddd, MMMM Do'),
-            roomName
+            reservationCode
         };
+        console.log(data);
 
         const initialValues = {
             fromName: '',
             fromEmail: '',
-            toName: '',
-            toEmail: '',
+            'toName-0': '',
+            'toEmail-0': '',
+            'toName-1': '',
+            'toEmail-1': '',
+            'toName-2': '',
+            'toEmail-2': '',
+            'toName-3': '',
+            'toEmail-3': '',
+            'toName-4': '',
+            'toEmail-4': '',
             datetime: this.defaultDate
         };
 
@@ -129,7 +174,10 @@ class InviteForm extends Component {
         .then(complete)
         .catch(error => `Error: ${error}`);
     }
+
     render() {
+        const { numberOfGuests } = this.state;
+
         return (
             <div className = 'date-creation-wrap'>
                 <Form
@@ -145,10 +193,10 @@ class InviteForm extends Component {
                                 { ...formProps }>
                                 <FormSection>
                                     <div className = 'date-creation-title enter-room-title'>
-                  Reserve a table:
+                      Reserve a table:
                                     </div>
                                     <div className = 'date-creation-subtitle'>
-                  Pick a date and time and we'll send the invite to your date
+                      Pick a date and time and we'll send the invite to your date
                                     </div>
                                     <div className = 'date-creation-row'>
                                         <div className = 'date-creation-row-child'>
@@ -158,11 +206,12 @@ class InviteForm extends Component {
                                                 id = 'date-creation-picker'
                                                 isRequired = { true }
                                                 name = 'datetime'
-                                                timePickerProps = { timePickerOptions }
                                                 validate = { this.validateDate }>
                                                 {({ fieldProps, error }) => (
                                                     <Fragment>
-                                                        <DateTimePicker { ...fieldProps } />
+                                                        <DateTimePicker
+                                                            { ...fieldProps }
+                                                            timePickerProps = {{ times: timePickerOptions }} />
                                                         {error && (
                                                             <ErrorMessage>
                                                                 {error}
@@ -180,15 +229,16 @@ class InviteForm extends Component {
                                                 defaultValue = ''
                                                 isRequired = { true }
                                                 label = 'Your Name'
-                                                name = 'fromName'>
+                                                name = 'fromName'
+                                                validate = { this.validateNonEmpty }>
                                                 {({ fieldProps, error }) => (
                                                     <Fragment>
+                                                        <TextField { ...fieldProps } />
                                                         {error && (
                                                             <ErrorMessage>
-                              This user name is already in use, try another one.
+                                  Cannot be empty.
                                                             </ErrorMessage>
                                                         )}
-                                                        <TextField { ...fieldProps } />
                                                     </Fragment>
                                                 )}
                                             </Field>
@@ -198,74 +248,86 @@ class InviteForm extends Component {
                                                 defaultValue = ''
                                                 isRequired = { true }
                                                 label = 'Your Email'
-                                                name = 'fromEmail'>
+                                                name = 'fromEmail'
+                                                validate = { this.validateNonEmpty }>
                                                 {({ fieldProps, error }) => (
                                                     <Fragment>
 
-                                                        {error && (
-                                                            <ErrorMessage>
-                              This user name is already in use, try another one.
-                                                            </ErrorMessage>
-                                                        )}
+
                                                         <TextField
                                                             autoComplete = 'off'
                                                             type = 'email'
                                                             { ...fieldProps } />
+                                                        {error && (
+                                                            <ErrorMessage>
+                                      Cannot be empty.
+                                                            </ErrorMessage>
+                                                        )}
                                                     </Fragment>
                                                 )}
                                             </Field>
                                         </div>
                                     </div>
                                     <div>
-                                        <br />
+                                        <div className = 'guest-section'>Guests</div>
+                                        {[ ...Array(numberOfGuests) ].map((_, index) => (
+                                            <div
+                                                className = 'date-creation-row'
+                                                key = { index }>
+                                                <div className = 'date-creation-row-child'>
+                                                    <Field
+                                                        defaultValue = ''
+                                                        isRequired = { true }
+                                                        label = "Guest's Name"
+                                                        name = { `toName-${index}` }
+                                                        validate = { this.validateNonEmpty }>
+                                                        {({ fieldProps, error }) => (
+                                                            <Fragment>
+                                                                <TextField
+                                                                    autoComplete = 'off'
+                                                                    { ...fieldProps } />
+                                                                {error && (
+                                                                    <ErrorMessage>
+                                                                              Cannot be empty.
+                                                                    </ErrorMessage>
+                                                                )}
+                                                            </Fragment>
+                                                        )}
+                                                    </Field>
+                                                </div>
+                                                <div className = 'date-creation-row-child'>
+                                                    <Field
+                                                        defaultValue = ''
+                                                        isRequired = { true }
+                                                        label = "Guest's Email"
+                                                        name = { `toEmail-${index}` }
+                                                        validate = { this.validateNonEmpty }>
+                                                        {({ fieldProps, error }) => (
+                                                            <Fragment>
+                                                                <TextField
+                                                                    autoComplete = 'off'
+                                                                    type = 'email'
+                                                                    { ...fieldProps } />
 
-                                  Guests
-
-                                        <div className = 'date-creation-row'>
-                                            <div className = 'date-creation-row-child'>
-                                                <Field
-                                                    defaultValue = ''
-                                                    isRequired = { true }
-                                                    label = "Date's Name"
-                                                    name = 'toName'>
-                                                    {({ fieldProps, error }) => (
-                                                        <Fragment>
-
-                                                            {error && (
-                                                                <ErrorMessage>
-                              This user name is already in use, try another one.
-                                                                </ErrorMessage>
-                                                            )}
-                                                            <TextField
-                                                                autoComplete = 'off'
-                                                                { ...fieldProps } />
-                                                        </Fragment>
-                                                    )}
-                                                </Field>
+                                                                {error && (
+                                                                    <ErrorMessage>
+                                                                          Cannot be empty.
+                                                                    </ErrorMessage>
+                                                                )}
+                                                            </Fragment>
+                                                        )}
+                                                    </Field>
+                                                </div>
                                             </div>
-                                            <div className = 'date-creation-row-child'>
-                                                <Field
-                                                    defaultValue = ''
-                                                    isRequired = { true }
-                                                    label = "Date's Email"
-                                                    name = 'toEmail'>
-                                                    {({ fieldProps, error }) => (
-                                                        <Fragment>
-
-                                                            {error && (
-                                                                <ErrorMessage>
-                              This user name is already in use, try another one.
-                                                                </ErrorMessage>
-                                                            )}
-                                                            <TextField
-                                                                autoComplete = 'off'
-                                                                type = 'email'
-                                                                { ...fieldProps } />
-                                                        </Fragment>
-                                                    )}
-                                                </Field>
-                                            </div>
+                                        ))}
+                                        <div className = 'guest-buttons'>
+                                            {numberOfGuests < 5 ? (
+                                                <button
+                                                    onClick = { this.increaseGuests }
+                                                    type = 'button'>Add Guest</button>
+                                            ) : <span>Sorry, maximum party size is 6 people.</span>}
                                         </div>
+
                                     </div>
                                 </FormSection>
                                 <div className = 'date-creation-row'>
@@ -273,7 +335,7 @@ class InviteForm extends Component {
                                         <Button
                                             className = 'date-creation-submit-button'
                                             isLoading = { submitting }
-                                            type = 'submit'>Create Invite</Button>
+                                            type = 'submit'>Create Reservation</Button>
                                     </FormFooter>
                                 </div>
                             </form>
