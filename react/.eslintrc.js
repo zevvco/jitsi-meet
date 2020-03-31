@@ -9,6 +9,8 @@ module.exports = {
         'react/jsx-handler-names': 'off',
         'require-jsdoc': 'off',
         'react/jsx-no-bind': 'off',
-        'react/no-danger': 'off'
+        'react/no-danger': 'off',
+        'react/jsx-pascal-case': 'off',
+        'max-len': 'off'
     }
 };

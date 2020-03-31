@@ -17,7 +17,7 @@ import ZevvLogo from '../../../../images/zevv-logo.svg';
 
 import { AbstractWelcomePage, _mapStateToProps, _mapDispatchToProps } from './AbstractWelcomePage';
 import Tabs from './Tabs';
-
+import FAQ from './FAQ';
 import InviteForm from './InviteForm';
 
 /**
@@ -202,9 +202,9 @@ class WelcomePage extends AbstractWelcomePage {
                     </div> */}
                     <div className = 'header-text-description'>
                         <div className = 'header-text-description-inner'>
-                        If you’re missing the face to face experience of sharing a meal with someone, don’t worry, we
-                        have you covered! Diner.digital helps you coordinate with someone special, friends, or
-                        family so you can share a meal together no matter where you’re
+                        Missing the experience of sharing a meal with someone face to face?
+                        We'll help you share a meal with someone special, friends, or
+                        family no matter where you’re
                             <span dangerouslySetInnerHTML = {{ __html: '&nbsp;' }} />located.
                         </div>
                     </div>
@@ -214,7 +214,7 @@ class WelcomePage extends AbstractWelcomePage {
 
                     <div id = 'enter_room'>
                         <div className = 'enter-room-input-container'>
-                            <div className = 'enter-room-subtitle'>Already have a date?</div>
+                            <div className = 'enter-room-subtitle'>Already have a reservation?</div>
 
                             <div className = 'enter-room-title'>
                                 { t('welcomepage.enterRoomTitle') }
@@ -243,6 +243,9 @@ class WelcomePage extends AbstractWelcomePage {
                             }
                         </div>
                     </div>
+                    <div className = 'spacer' />
+                    <FAQ />
+
 
                     {/* { this._renderTabs() } */}
                 </div>

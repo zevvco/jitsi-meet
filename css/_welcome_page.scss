@@ -16,7 +16,7 @@ $dark: #222222;
     position: relative;
     .spacer {
       max-width: 4rem;
-      border-bottom: 2px solid $dark;
+      border-bottom: 1px solid $dark;
       width: 100%;
       margin: 1rem auto;;
     }
@@ -212,7 +212,8 @@ $dark: #222222;
                 height: fit-content;
                 border-width: $welcomePageEnterRoomInputContainerBorderWidth;
                 border-style: $welcomePageEnterRoomInputContainerBorderStyle;
-                border-image: $welcomePageEnterRoomInputContainerBorderImage;
+                // border-image: $welcomePageEnterRoomInputContainerBorderImage;
+
                 .enter-room-subtitle {
                   margin-bottom: 0.5rem;
                 }
@@ -339,4 +340,39 @@ $dark: #222222;
       background: #fdfdfa;
       border: 2px solid $dark;
     }
+    .FAQ-wrap {
+      color: $dark;
+      max-width: 650px;
+      width: 100%;
+      z-index: 2;
+      margin: 0 auto;
+      font-size: 16px;
+      margin-top: 24px;
+      margin-bottom: 3rem;
+      .FAQ-title {
+        padding-bottom: 1rem;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .FAQ-section {
+        border: none;
+      }
+      .FAQ-question {
+        font-weight: bold;
+        padding: 1rem 0;
+        border-bottom: 1px solid $dark;
+        text-align: left;
+
+      }
+      .FAQ-answer {
+        padding: 1rem 0;
+        text-align: left;
+      }
+    }
+
+
+}
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
 }
