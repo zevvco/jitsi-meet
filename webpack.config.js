@@ -265,7 +265,7 @@ module.exports = [
             library: 'JitsiMeetExternalAPI',
             libraryTarget: 'umd'
         }),
-        performance: getPerformanceHints(30 * 1024)
+        performance: { hints: false }
     })
 ];
 
