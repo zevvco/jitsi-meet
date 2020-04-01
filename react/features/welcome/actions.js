@@ -40,15 +40,9 @@ export function setWelcomePageListsDefaultPage(pageIndex: number) {
 }
 
 
-/**
- * Toggles success flag on form submit.
- *
- * @param {boolean} isSubmitSuccessful - Should the flag be set as true.
- * @returns {undefined}
- */
-export function setInviteFormSubmissionState(isSubmitSuccessful: boolean) {
+export function setInviteFormSuccess(calendarLink: string) {
     return {
         type: SET_INVITE_FORM_SUBMIT_SUCCESS,
-        isSubmitSuccessful
+        calendarLink
     };
 }

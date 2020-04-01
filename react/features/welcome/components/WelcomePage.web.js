@@ -195,11 +195,6 @@ class WelcomePage extends AbstractWelcomePage {
                     <div className = 'logo'>
                         <Logo />
                     </div>
-                    {/* <div className = 'header-text'>
-                        <h1 className = 'header-text-title'>
-                            { t('welcomepage.title') }
-                        </h1>
-                    </div> */}
                     <div className = 'header-text-description'>
                         <div className = 'header-text-description-inner'>
                         Missing the experience of sharing a meal with someone face to face?
@@ -209,7 +204,7 @@ class WelcomePage extends AbstractWelcomePage {
                         </div>
                     </div>
                     <div className = 'spacer' />
-                    <InviteForm onSubmit = { this.props.setInviteFormSubmissionState } />
+                    <InviteForm />
                     <div className = 'spacer' />
 
                     <div id = 'enter_room'>
