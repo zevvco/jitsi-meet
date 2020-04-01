@@ -135,7 +135,7 @@ class InviteForm extends Component {
             fromName: cleanString(fromName),
             fromEmail: fromEmail.trim(),
             toName: toNameString,
-            toEmail: [ toEmailArray ],
+            toEmail: toEmailArray,
             datetime,
             unixDatetime: moment(datetime).format('x'),
             meetingTime: moment(datetime).format('h:mm A ') + timezone,
