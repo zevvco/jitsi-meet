@@ -111,14 +111,14 @@ class InviteForm extends Component {
         }
     }
     generateGoogleCalenderLink({ fromName, reservationCode, datetime }) {
-        const timeOfDinner = moment(datetime);
-        const timeOfDinnerEnd = moment(datetime).add(3, 'h');
+        const timeOfDinner = moment.utc(moment(datetime));
+        const timeOfDinnerEnd = moment.utc(moment(datetime).add(3, 'h'));
 
         const queryObject = {
             text: `${fromName}'s Digital Dinner`,
             dates: `${timeOfDinner.format('YYYYMMDDTHHmmss')}Z/${timeOfDinnerEnd.format('YYYYMMDDTHHmmss')}Z`,
-            details: `Join the room with reservation code ${reservationCode} or by clicking this link: http://digitaldinnerdate.com/${reservationCode}`,
-            location: `http://digitaldinnerdate.com/${reservationCode}`,
+            details: `Join the room with reservation code ${reservationCode} or by clicking this link: https://diner.digital/${reservationCode}`,
+            location: `https://diner.digital/${reservationCode}`,
             output: 'xml',
             sf: true
         };
@@ -195,10 +195,13 @@ class InviteForm extends Component {
             this.props.dispatch(setInviteFormSuccess(calendarLink));
             console.log('submitted', this.form);
 
+            // this.form.form.initialize(initialValues);
+
             // Object.keys(initialValues).forEach(key => {
             //     this.form.form.change(key, initialValues[key]);
-            //     this.form.form.resetFieldState(key);
             // });
+            // this.form.form.reset();
+
             // form.reset() wasnt working like it should, so below is the manual reset
         })
         .catch(error => `Error: ${error}`);
