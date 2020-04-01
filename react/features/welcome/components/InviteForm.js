@@ -6,6 +6,10 @@ import { DateTimePicker } from '@atlaskit/datetime-picker';
 import TextField from '@atlaskit/textfield';
 import Button from '@atlaskit/button';
 import { customAlphabet } from 'nanoid';
+import { EMAIL_POST_ENDPOINT } from '../constants';
+import { connect } from '../../base/redux';
+import { setInviteFormSuccess } from '../actions';
+import qs from 'qs';
 
 const nanoid = customAlphabet('2346789ABDEFGHJLMNPQRTVWXYZ', 6);
 
@@ -99,16 +103,30 @@ class InviteForm extends Component {
         return;
     }
     increaseGuests() {
-
         const { numberOfGuests } = this.state;
         if (numberOfGuests < 5) {
-            console.log('increasing', numberOfGuests);
             this.setState({
                 numberOfGuests: numberOfGuests + 1
             });
         }
     }
-    onSubmit(formData, formControl, complete) {
+    generateGoogleCalenderLink({ fromName, reservationCode, datetime }) {
+        const timeOfDinner = moment(datetime);
+        const timeOfDinnerEnd = moment(datetime).add(3, 'h');
+
+        const queryObject = {
+            text: `${fromName}'s Digital Dinner`,
+            dates: `${timeOfDinner.format('YYYYMMDDTHHmmss')}Z/${timeOfDinnerEnd.format('YYYYMMDDTHHmmss')}Z`,
+            details: `Join the room with reservation code ${reservationCode} or by clicking this link: http://digitaldinnerdate.com/${reservationCode}`,
+            location: `http://digitaldinnerdate.com/${reservationCode}`,
+            output: 'xml',
+            sf: true
+        };
+        const query = qs.stringify(queryObject);
+
+        return `https://calendar.google.com/calendar/r/eventedit?${query}`;
+    }
+    onSubmit(formData) {
         const {
             fromName,
             fromEmail,
@@ -131,47 +149,58 @@ class InviteForm extends Component {
         //  array of names, ui
         const reservationCode = `${cleanString(fromName.split(' ')[0])}-${nanoid()}`;
         const timezone = moment.tz(moment.tz.guess(true)).format('z');
+
+        const calendarLink = this.generateGoogleCalenderLink({
+            fromName,
+            datetime,
+            reservationCode
+        });
+
         const data = {
             fromName: cleanString(fromName),
             fromEmail: fromEmail.trim(),
             toName: toNameString,
-            toEmail: [ toEmailArray ],
+            toEmail: toEmailArray,
             datetime,
             unixDatetime: moment(datetime).format('x'),
             meetingTime: moment(datetime).format('h:mm A ') + timezone,
             meetingDate: moment(datetime).format('dddd, MMMM Do'),
-            reservationCode
+            reservationCode,
+            calendarLink
         };
-        console.log(data);
+        console.log('submitting:', data);
 
-        const initialValues = {
-            fromName: '',
-            fromEmail: '',
-            'toName-0': '',
-            'toEmail-0': '',
-            'toName-1': '',
-            'toEmail-1': '',
-            'toName-2': '',
-            'toEmail-2': '',
-            'toName-3': '',
-            'toEmail-3': '',
-            'toName-4': '',
-            'toEmail-4': '',
-            datetime: this.defaultDate
-        };
+        // const initialValues = {
+        //     fromName: '',
+        //     fromEmail: '',
+        //     'toName-0': '',
+        //     'toEmail-0': '',
+        //     'toName-1': '',
+        //     'toEmail-1': '',
+        //     'toName-2': '',
+        //     'toEmail-2': '',
+        //     'toName-3': '',
+        //     'toEmail-3': '',
+        //     'toName-4': '',
+        //     'toEmail-4': '',
+        //     datetime: this.defaultDate
+        // };
+
 
         return axios({
-            url: 'https://epc915mrt9.execute-api.us-east-1.amazonaws.com/prod/invite',
+            url: EMAIL_POST_ENDPOINT,
             method: 'POST',
             data
         }).then(() => {
+            this.props.dispatch(setInviteFormSuccess(calendarLink));
+            console.log('submitted', this.form);
+
+            // Object.keys(initialValues).forEach(key => {
+            //     this.form.form.change(key, initialValues[key]);
+            //     this.form.form.resetFieldState(key);
+            // });
             // form.reset() wasnt working like it should, so below is the manual reset
-            Object.keys(initialValues).forEach(key => {
-                this.form.form.change(key, initialValues[key]);
-            });
-            this.props.onSubmit(true);
         })
-        .then(complete)
         .catch(error => `Error: ${error}`);
     }
 
@@ -347,4 +376,4 @@ class InviteForm extends Component {
 }
 
 
-export default InviteForm;
+export default connect()(InviteForm);

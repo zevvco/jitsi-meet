@@ -9,9 +9,6 @@ import { appNavigate } from '../../app';
 import { isCalendarEnabled } from '../../calendar-sync';
 import { isRoomValid } from '../../base/conference';
 
-import {
-    setInviteFormSubmissionState
-} from '../actions';
 
 /**
  * {@code AbstractWelcomePage}'s React {@code Component} prop types.
@@ -264,7 +261,6 @@ export function _mapStateToProps(state: Object) {
 
 export function _mapDispatchToProps(dispatch: Function) {
     return {
-        dispatch,
-        setInviteFormSubmissionState: (value: boolean) => dispatch(setInviteFormSubmissionState(value))
+        dispatch
     };
 }
